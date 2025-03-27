@@ -3,6 +3,7 @@ package org.example;
 import org.example.implementations.GreedyCycleAlgorithm;
 import org.example.implementations.NearestNeighborAlgorithm;
 import org.example.implementations.RegretHeuristicAlgorithm;
+import org.example.implementations.WeightedRegretHeuristicAlgorithm;
 import org.example.utils.Instance;
 import org.example.utils.Utils;
 
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        String filename = "kroB200.tsp";
+        String filename = "kroA200.tsp";
 
         Instance instance;
         try {
@@ -27,6 +28,10 @@ public class Main {
 
         System.out.println("Heurystyka najbliższego sąsiada:");
         Utils.runExperiments("Nearest Neighbor", new NearestNeighborAlgorithm(), instance, distanceMatrix, numRuns, random);
+
+        System.out.println("Heurystyka weight  żal:");
+        Utils.runExperiments("Ważony żal", new WeightedRegretHeuristicAlgorithm(1, -1), instance, distanceMatrix, numRuns, random);
+
 
         System.out.println("\nMetoda rozbudowy cyklu:");
         Utils.runExperiments("Greedy Cycle", new GreedyCycleAlgorithm(), instance, distanceMatrix, numRuns, random);
